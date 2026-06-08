@@ -1,6 +1,4 @@
-*
-!README.md
-!early-init.el
-!init.el
-!.github/
-!.LICENSE
+var/
+*.elc
+*~
+*-autoloads.el
