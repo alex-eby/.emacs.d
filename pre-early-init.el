@@ -1,7 +1,7 @@
 ;;; pre-early-init.el --- Extra-early config -*- no-byte-compile: t; lexical-binding: t; -*-
 
 ;; Enable to debug init files
-(setopt debug-on-error t)
+(setopt debug-on-error nil)
 
 ;; Reducing clutter in ~/.emacs.d by redirecting files to ~/.emacs.d/var/
 (setq user-emacs-directory (expand-file-name "var/" minimal-emacs-user-directory))

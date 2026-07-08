@@ -50,5 +50,20 @@
   (denote-journal-keyword "journal")
   (denote-journal-title-format 'day-date-month-year))
 
+(use-package pdf-tools
+  :ensure t
+  :init (pdf-loader-install))
+
+(use-package org-noter
+  :ensure t
+  :bind (:map pdf-view-mode-map
+              ("e" . #'org-noter)
+              :map org-noter-doc-mode-map
+              ("i" . #'org-noter-insert-precise-note)
+              ("M-i" . #'org-noter-insert-note)))
+
+(use-package nov :ensure t)
+(use-package djvu :ensure t)
+
 (provide 'notes-sl)
 ;;; notes-sl.el ends here

@@ -2,3 +2,4 @@ var/
 *.elc
 *~
 *-autoloads.el
+eln-cache/

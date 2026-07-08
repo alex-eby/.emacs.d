@@ -6,6 +6,7 @@
          ("C-c l i" . #'org-insert-link-global)
          ("C-c c" . #'org-capture)
          ("C-c a" . #'org-agenda))
+  :hook (org-mode . org-indent-mode)
   :custom
   ;; Critical variables
   (org-directory "~/MEGA/org/")
@@ -92,13 +93,13 @@
               (not (keywordp (car-safe (cdr spec)))))
           `(:inherit ,(cdr spec))
         (cdr spec)))
-  
+    
     (dolist (spec org-tag-faces)
       (add-to-list 'org-modern-tag-faces `(,(car spec) :inverse-video t ,@(new-spec spec))))
-  
+    
     (dolist (spec org-todo-keyword-faces)
       (add-to-list 'org-modern-todo-faces `(,(car spec) :inverse-video t ,@(new-spec spec))))
-  
+    
     (dolist (spec org-priority-faces)
       (add-to-list 'org-modern-priority-faces `(,(car spec) :inverse-video t ,@(new-spec spec)))))
   )

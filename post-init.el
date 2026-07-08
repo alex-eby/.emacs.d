@@ -1,8 +1,18 @@
 ;;; post-init.el --- Main personal config -*- no-byte-compile: t; lexical-binding: t; -*-
 
+;; Some keybind assistance
+(which-key-mode)
+
+;; Show column numbers in mode line
+(column-number-mode)
+
 ;; Set default font
 (set-face-attribute 'default nil
-                    :height 100 :weight 'regular :family "Hack Nerd Font")
+                    :height 100 :weight 'regular :family "Hack Nerd Font Mono")
+
+;; Large selection of colorful themes
+(use-package ef-themes
+  :ensure t)
 
 ;; Doom theme collection
 (use-package doom-themes
@@ -13,6 +23,9 @@
 
   :config
   (progn
+    ;; bugfix face-inheritance cycle
+    (setcdr (assoc 'gnus-group-news-low-empty doom-themes-base-faces)
+            '(:inherit 'gnus-group-mail-1-empty :weight 'normal))
     ;; Default to `doom-nord' theme
     (load-theme 'doom-nord t)
 
@@ -38,9 +51,6 @@
 
 ;; Smooth scrolling
 (pixel-scroll-precision-mode)
-
-;; Do not overwrite externally copied text on kill
-(setopt save-interprogram-paste-before-kill t)
 
 ;; Overwrite selection with any input
 (delete-selection-mode)
@@ -164,20 +174,9 @@ Else => `keyboard-quit'"
 ;; Code folding powered by tree-sitter
 (use-package treesit-fold
   :ensure t
-  :commands (treesit-fold-close
-             treesit-fold-close-all
-             treesit-fold-open
-             treesit-fold-toggle
-             treesit-fold-open-all
-             treesit-fold-mode
-             global-treesit-fold-mode
-             treesit-fold-open-recursively
-             treesit-fold-line-comment-mode)
-
   :custom
   (treesit-fold-line-count-show t)
   (treesit-fold-line-count-format " ▼")
-
   :config
   (progn
     ;; Prettify the fold indicator
@@ -187,7 +186,7 @@ Else => `keyboard-quit'"
                         :weight 'bold)
 
     ;; Enable `treesit-fold-mode' in all supported buffers
-    (global-treesit-fold-mode +1)))
+    (global-treesit-fold-mode)))
 
 ;; Code folding not powered by tree-sitter
 (add-hook 'emacs-lisp-mode-hook #'hs-minor-mode)
@@ -223,6 +222,14 @@ Else => `keyboard-quit'"
    ("C-c z c" . #'kirigami-close-fold)         ; Close fold at point
    ("C-c z m" . #'kirigami-close-folds)        ; Close all folds
    ("C-c z z" . #'kirigami-toggle-fold)))      ; Toggle fold at point
+
+;; Terminal support
+(use-package vterm
+  :ensure t
+  :bind (("C-c 4 t" . #'vterm-other-window)
+         ("C-c t" . #'vterm))
+  :hook (vterm-mode . mode-line-invisible-mode)
+  :custom (vterm-max-scrollback 5000))
 
 (let ((modules-dir (expand-file-name "modules/" minimal-emacs-user-directory)))
   (add-to-list 'load-path modules-dir)
