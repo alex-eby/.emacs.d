@@ -59,7 +59,6 @@
          ("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)
          ("C-c k" . consult-kmacro)
-         ("C-c m" . consult-man)
          ("C-c i" . consult-info)
          ([remap Info-search] . consult-info)
          ;; C-x bindings in `ctl-x-map'
@@ -95,6 +94,7 @@
          ("M-s L" . consult-line-multi)
          ("M-s k" . consult-keep-lines)
          ("M-s u" . consult-focus-lines)
+         ("M-s m" . consult-man) ; [S]earch man pages
          ;; Isearch integration
          ("M-s e" . consult-isearch-history)
          :map isearch-mode-map

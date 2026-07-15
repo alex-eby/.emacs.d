@@ -75,6 +75,9 @@
          ([remap describe-symbol] . helpful-symbol)
          ([remap describe-variable] . helpful-variable)))
 
+;; Convenient keybind for man page lookup
+(keymap-global-set "C-c m" #'man)
+
 (define-advice keyboard-quit (:around (quit) quit-current-context)
   "DWIM-style augmentation for `keyboard-quit'.
 
